@@ -9,7 +9,7 @@ func main() {
 		"bllob":[]string{"1","3"},
 		"BEEEF":[]string{"DASD","DA"},
 	}
-	fmt.Println(keysIn(m))
+	fmt.Println(stringIn(m))
 }
 //YAY! stringIn works!
 func stringIn(str string, slice []string) bool{
@@ -61,9 +61,15 @@ func twoChars(str string) string{
 }
 func allWordsUnderListOfKeys(dct map [string] []string, keys []string, alreadyDone []string) []string {
 	// FYI, the dct will be a map, not a slice. Find the syntax for maps.
-	//words := []string{}
-	//for key := range keys {
-	//	if stringIn(key,
-	//}
-	return []string{}
+	words := []string{}
+	for key := range keys {
+		if stringIn(keys[key],keysIn(dct)) {
+			for val := range dct[keys[key]] {
+				if stringIn(dct[keys[key]][val],alreadyDone)==false {
+					words=append(words,dct[keys[key]][val])
+				}
+			}
+		}
+	}
+	return words
 }
