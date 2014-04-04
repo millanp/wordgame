@@ -6,9 +6,16 @@ import (
 	)
 func main() {
 	x:=[]string{"erws","fgook","fs"}
-	for v:=range x {
-		fmt.Println(v)
+	fmt.Println(stringIn("erws",x))
+}
+//YAY! stringIn works!
+func stringIn(str string, slice []string) bool{
+	for val := range slice {
+		if slice[val] == str {
+			return true
+		}
 	}
+	return false
 }
 func parent(nw string) string{
 	lnw := strings.Split(nw,"")
@@ -41,10 +48,11 @@ func twoChars(str string) string{
 	result:=strings.Join(newCharList,"")
 	return result
 }
-func allWordsUnderListOfKeys(dct string, keys string, alreadyDone string) string {
+func allWordsUnderListOfKeys(dct []string, keys []string, alreadyDone []string) []string {
+	// FYI, the dct will be a map, not a slice. Find the syntax for maps.
 	//words := []string{}
 	//for key := range keys {
 		//How on earth do you check if something is in something else in go?
 	//}
-	return "GOOG"
+	return []string{}
 }
