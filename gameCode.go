@@ -3,13 +3,15 @@ import (
 	"fmt"
 	//"math/rand"
 	"strings"
+	//"bufio"
+	"strconv"
 	)
 func main() {
 	var m = map[string][]string {
 		"bllob":[]string{"1","3"},
 		"BEEEF":[]string{"DASD","DA"},
 	}
-	fmt.Println(stringIn(m))
+	fmt.Println(m["bllob"][1])
 }
 //YAY! stringIn works!
 func stringIn(str string, slice []string) bool{
@@ -73,3 +75,23 @@ func allWordsUnderListOfKeys(dct map [string] []string, keys []string, alreadyDo
 	}
 	return words
 }
+//I HATE GO!!!!!! WHY DOES THE STRING TO INT CONVERSION NOT WORK!!!!!!!
+//func decodeIndNumbers(numberStringList []string) (int,int) {
+//	cs := []string{}
+//	location := []string{}
+//	passedSpace := false
+//	for val := range numberStringList {
+//		if numberStringList[val] != " " && passedSpace==false {
+//			cs=append(cs,numberStringList[val])
+//		}
+//		if numberStringList[val] == " " {
+//			passedSpace=true
+//		}
+//		if numberStringList[val] != " " && passedSpace {
+//			location=append(location,numberStringList[val])
+//		}
+//	}
+//	cs=strconv.Atoi(strings.Join(cs,""))
+//	location=strconv.Atoi(strings.Join(location,""))
+//	return []int{cs,location}
+//}
