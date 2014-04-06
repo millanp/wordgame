@@ -3,15 +3,13 @@ import (
 	"fmt"
 	//"math/rand"
 	"strings"
-	//"bufio"
+	"bufio"
 	"strconv"
+	"os"
 	)
 func main() {
-	var m = map[string][]string {
-		"bllob":[]string{"1","3"},
-		"BEEEF":[]string{"DASD","DA"},
-	}
-	fmt.Println(m["bllob"][1])
+	ind:=getIndex()
+	fmt.Println(ind[3][1])
 }
 //YAY! stringIn works!
 func stringIn(str string, slice []string) bool{
@@ -75,23 +73,56 @@ func allWordsUnderListOfKeys(dct map [string] []string, keys []string, alreadyDo
 	}
 	return words
 }
-//I HATE GO!!!!!! WHY DOES THE STRING TO INT CONVERSION NOT WORK!!!!!!!
-//func decodeIndNumbers(numberStringList []string) (int,int) {
-//	cs := []string{}
-//	location := []string{}
-//	passedSpace := false
-//	for val := range numberStringList {
-//		if numberStringList[val] != " " && passedSpace==false {
-//			cs=append(cs,numberStringList[val])
-//		}
-//		if numberStringList[val] == " " {
-//			passedSpace=true
-//		}
-//		if numberStringList[val] != " " && passedSpace {
-//			location=append(location,numberStringList[val])
-//		}
-//	}
-//	cs=strconv.Atoi(strings.Join(cs,""))
-//	location=strconv.Atoi(strings.Join(location,""))
-//	return []int{cs,location}
+func decodeIndNumbers(numberStringList []string) (int,int) {
+	cs := []string{}
+	location := []string{}
+	passedSpace := false
+	for val := range numberStringList {
+		if numberStringList[val] != " " && passedSpace==false {
+			cs=append(cs,numberStringList[val])
+		}
+		if numberStringList[val] == " " {
+			passedSpace=true
+		}
+		if numberStringList[val] != " " && passedSpace {
+			location=append(location,numberStringList[val])
+		}
+	}
+	csInt,_ := strconv.Atoi(strings.Join(cs,""))
+	locationInt,_ := strconv.Atoi(strings.Join(location,""))
+	return csInt, locationInt
+}
+func getIndex() map[int] []int {
+	_=os.Chdir("C:/Users/milla_000/Documents/GitHub/WordGameProj/src/github.com/millanp/wordgame")
+	indexfl,err := os.Open("index")
+	if err != nil {
+    	fmt.Printf("error opening file: %v\n",err)
+  	  	os.Exit(1)
+	}
+	//IS THIS SLOWING DOWN THE PROGRAM? (bufio)
+	index := bufio.NewReader(indexfl)
+	ln,_,e := index.ReadLine()
+	locations := map[int] []int {}
+	var vals []string
+	var start int
+	for e == nil {
+		line := string(ln)
+		if twoChars(line) == "CS" {
+			vals=strings.Split(strings.TrimSpace(line)," ")
+			start,_:=strconv.Atoi(vals[2])
+			fmt.Println(start)
+		} else if twoChars(line)=="EN" {
+			vals=strings.Split(strings.TrimSpace(line)," ")
+			changeLocation,_:=strconv.Atoi(vals[1])
+			endLoc,_:=strconv.Atoi(vals[2])
+			locations[changeLocation]=[]int{start,endLoc}
+		}
+		ln,_,e=index.ReadLine()
+	}
+	indexfl.Close()
+	return locations
+}
+//func getNetwork(charsInWord int) map[string][]string {
+//	index := getIndex()
+//	
 //}
