@@ -7,6 +7,26 @@ import (
 	"strconv"
 	"os"
 	)
+//how to open file, then read each line one by one
+// uncomment for windows
+//_=os.Chdir("C:/Users/milla_000/Documents/GitHub/WordGameProj/src/github.com/millanp/wordgame")
+//uncomment for Ubuntu
+//_=os.Chdir("/home/millan/goprojects/WordGame/src/github.com/millanp/wordgame")
+//<your file var name>,err := os.Open("<your file>")
+//if err != nil {
+//	fmt.Printf("error opening file: %v\n",err)
+// 	  	os.Exit(1)
+//}
+////IS THIS SLOWING DOWN THE PROGRAM? (bufio)
+//index := bufio.NewReader(<y f v n>)
+//ln,_,e := index.ReadLine()
+//for e==nil {
+//	line := string(ln)
+//	<code which reads/needs each line one by one>
+//	ln,_,e=index.ReadLine()
+//}
+//<other code>
+//<y f v n>.close()
 func main() {
 	ind:=getIndex()
 	fmt.Println(ind[3][1])
@@ -93,7 +113,10 @@ func decodeIndNumbers(numberStringList []string) (int,int) {
 	return csInt, locationInt
 }
 func getIndex() map[int] []int {
-	_=os.Chdir("C:/Users/milla_000/Documents/GitHub/WordGameProj/src/github.com/millanp/wordgame")
+	// uncomment for windows
+	//_=os.Chdir("C:/Users/milla_000/Documents/GitHub/WordGameProj/src/github.com/millanp/wordgame")
+	//uncomment for Ubuntu
+	_=os.Chdir("/home/millan/goprojects/WordGame/src/github.com/millanp/wordgame")
 	indexfl,err := os.Open("index")
 	if err != nil {
     	fmt.Printf("error opening file: %v\n",err)
@@ -124,5 +147,19 @@ func getIndex() map[int] []int {
 }
 //func getNetwork(charsInWord int) map[string][]string {
 //	index := getIndex()
-//	
+//	var netwk map[string][]string
+//	// uncomment for windows
+//	//_=os.Chdir("C:/Users/milla_000/Documents/GitHub/WordGameProj/src/github.com/millanp/wordgame")
+//	//uncomment for Ubuntu
+//	_=os.Chdir("/home/millan/goprojects/WordGame/src/github.com/millanp/wordgame")
+//	indexfl,err := os.Open("index")
+//	if err != nil {
+//    	fmt.Printf("error opening file: %v\n",err)
+//  	  	os.Exit(1)
+//	}
+//	//IS THIS SLOWING DOWN THE PROGRAM? (bufio)
+//	index := bufio.NewReader(indexfl)
+//	ln,_,e := index.ReadLine()
+//	for e==nil {
+//		
 //}
